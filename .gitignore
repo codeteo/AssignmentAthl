@@ -9,3 +9,6 @@
 /build
 /captures
 .externalNativeBuild
+
+# Keys
+secrets.properties
