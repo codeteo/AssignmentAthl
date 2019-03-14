@@ -1,16 +1,27 @@
 package com.assignment.teo.features.search;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.transition.Transition;
+import android.support.transition.TransitionManager;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.ViewTreeObserver;
 
 import com.assignment.teo.R;
+import com.assignment.teo.base.BaseTransitionActivity;
+import com.assignment.teo.features.search.views.SearchBar;
+import com.assignment.teo.widgets.transitions.FadeInTransition;
+import com.assignment.teo.widgets.transitions.FadeOutTransition;
+import com.assignment.teo.widgets.transitions.SimpleTransitionListener;
 
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 import timber.log.Timber;
 
-public class SearchActivity extends AppCompatActivity implements SearchMVP.View {
+public class SearchActivity extends BaseTransitionActivity implements SearchMVP.View {
+
+    private SearchBar searchbar;
 
     @Inject
     SearchMVP.Presenter presenter;
@@ -20,6 +31,73 @@ public class SearchActivity extends AppCompatActivity implements SearchMVP.View 
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        searchbar = findViewById(R.id.search_toolbar);
+        setSupportActionBar(searchbar);
+
+        if (isFirstTimeRunning(savedInstanceState)) {
+            searchbar.hideContent();
+
+            ViewTreeObserver viewTreeObserver = searchbar.getViewTreeObserver();
+            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    searchbar.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                    showSearch();
+                }
+
+                private void showSearch() {
+                    TransitionManager.beginDelayedTransition(searchbar, FadeInTransition.createTransition());
+                    searchbar.showContent();
+                }
+            });
+        }
+    }
+
+    private boolean isFirstTimeRunning(Bundle savedInstanceState) {
+        return savedInstanceState == null;
+    }
+
+    public void finish() {
+        hideKeyboard();
+
+        exitTransitionWithAction(() -> {
+            SearchActivity.super.finish();
+
+            overridePendingTransition(0, 0);
+        });
+    }
+
+    private void exitTransitionWithAction(final Runnable endingAction) {
+
+        Transition transition = FadeOutTransition.withAction(new SimpleTransitionListener() {
+            @Override
+            public void onTransitionEnd(Transition transition) {
+                endingAction.run();
+            }
+        });
+
+        TransitionManager.beginDelayedTransition(searchbar, transition);
+        searchbar.hideContent();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        } else if (item.getItemId() == R.id.action_clear) {
+            searchbar.clearText();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

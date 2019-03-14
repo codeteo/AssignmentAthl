@@ -19,8 +19,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/Desktop/ic_action_search.png" />
-                                      <entry key="outputName" value="ic_action_search" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Desktop/ic_action_clear.png" />
+                                      <entry key="outputName" value="ic_action_clear" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -23,7 +23,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".features.search.SearchActivity" />
+        <activity
+            android:name=".features.search.SearchActivity"
+            android:windowSoftInputMode="stateVisible" />
+
     </application>
 
 </manifest>

@@ -1,11 +1,8 @@
 package com.assignment.teo.widgets.transitions;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.transition.AutoTransition;
-import android.transition.Transition;
+import android.support.transition.AutoTransition;
+import android.support.transition.Transition;
 
-@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public class FadeInTransition extends AutoTransition {
 
     private static final int FADE_IN_DURATION = 200;
