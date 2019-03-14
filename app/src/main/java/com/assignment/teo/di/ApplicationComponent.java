@@ -3,6 +3,7 @@ package com.assignment.teo.di;
 import android.app.Application;
 
 import com.assignment.teo.MyApplication;
+import com.assignment.teo.di.builders.ActivityBindingModule;
 import com.assignment.teo.di.modules.ApplicationModule;
 
 import javax.inject.Singleton;
@@ -17,7 +18,10 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 
 @Singleton
-@Component(modules = { AndroidSupportInjectionModule.class, ApplicationModule.class })
+@Component(modules = {
+        AndroidSupportInjectionModule.class,
+        ActivityBindingModule.class,
+        ApplicationModule.class })
 public interface ApplicationComponent extends AndroidInjector<MyApplication> {
 
     @Component.Builder
