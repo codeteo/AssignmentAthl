@@ -8,7 +8,7 @@ import android.support.transition.TransitionManager;
 import android.widget.FrameLayout;
 
 import com.assignment.teo.R;
-import com.assignment.teo.base.BaseTransitionActivity;
+import com.assignment.teo.common.base.BaseTransitionActivity;
 import com.assignment.teo.features.main.views.SimpleToolbar;
 import com.assignment.teo.features.search.SearchActivity;
 import com.assignment.teo.widgets.transitions.FadeInTransition;

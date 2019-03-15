@@ -1,6 +1,6 @@
 package com.assignment.teo.data.features.search.movies;
 
-import com.assignment.teo.data.features.search.entities.MoviesSearchResponse;
+import com.assignment.teo.data.features.search.movies.entities.MoviesSearchResponse;
 
 import io.reactivex.Observable;
 import retrofit2.Response;

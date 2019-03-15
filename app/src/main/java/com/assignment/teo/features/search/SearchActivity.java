@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 
 import com.assignment.teo.R;
-import com.assignment.teo.base.BaseTransitionActivity;
+import com.assignment.teo.common.base.BaseTransitionActivity;
 import com.assignment.teo.features.search.views.SearchBar;
 import com.assignment.teo.widgets.transitions.FadeInTransition;
 import com.assignment.teo.widgets.transitions.FadeOutTransition;

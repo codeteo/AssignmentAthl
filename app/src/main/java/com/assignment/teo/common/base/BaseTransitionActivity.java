@@ -1,4 +1,4 @@
-package com.assignment.teo.base;
+package com.assignment.teo.common.base;
 
 import android.app.Activity;
 import android.content.Context;
