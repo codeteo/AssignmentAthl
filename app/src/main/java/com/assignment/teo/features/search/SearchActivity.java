@@ -19,7 +19,8 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjection;
 import timber.log.Timber;
 
-public class SearchActivity extends BaseTransitionActivity implements SearchMVP.View {
+public class SearchActivity extends BaseTransitionActivity
+        implements SearchMVP.View , SearchBar.SimpleToolbarCallback {
 
     private SearchBar searchbar;
 
@@ -34,6 +35,8 @@ public class SearchActivity extends BaseTransitionActivity implements SearchMVP.
 
         searchbar = findViewById(R.id.search_toolbar);
         setSupportActionBar(searchbar);
+
+        searchbar.setActivityListener(this);
 
         if (isFirstTimeRunning(savedInstanceState)) {
             searchbar.hideContent();
@@ -103,5 +106,11 @@ public class SearchActivity extends BaseTransitionActivity implements SearchMVP.
     @Override
     public void showMessage(String message) {
         Timber.i("SHOW MESSAGE");
+    }
+
+    @Override
+    public void onTextChanged(String text) {
+        Timber.i("SEARCH-ACTIVITY TEXT: %s", text);
+        // TODO: 15/3/2019 Call presenter to initiate network request
     }
 }
