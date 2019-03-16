@@ -43,6 +43,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibrary"
     implementation libs.constraintLayout
     implementation libs.recyclerView
+    implementation libs.designSupport
     implementation libs.picasso
     implementation libs.palette
     testImplementation 'junit:junit:4.12'

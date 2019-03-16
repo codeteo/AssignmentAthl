@@ -1,14 +1,18 @@
 package com.assignment.teo.features.search;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.transition.Transition;
 import android.support.transition.TransitionManager;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 
 import com.assignment.teo.R;
 import com.assignment.teo.common.base.BaseTransitionActivity;
+import com.assignment.teo.features.search.fragments.movies.MoviesListFragment;
+import com.assignment.teo.features.search.fragments.shows.ShowsListFragment;
 import com.assignment.teo.features.search.views.SearchBar;
 import com.assignment.teo.widgets.transitions.FadeInTransition;
 import com.assignment.teo.widgets.transitions.FadeOutTransition;
@@ -23,6 +27,8 @@ public class SearchActivity extends BaseTransitionActivity
         implements SearchMVP.View , SearchBar.SimpleToolbarCallback {
 
     private SearchBar searchbar;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
 
     @Inject
     SearchMVP.Presenter presenter;
@@ -35,6 +41,12 @@ public class SearchActivity extends BaseTransitionActivity
 
         searchbar = findViewById(R.id.search_toolbar);
         setSupportActionBar(searchbar);
+
+        viewPager = findViewById(R.id.viewpager);
+        setUpViewPager(viewPager);
+
+        tabLayout = findViewById(R.id.tablayout);
+        tabLayout.setupWithViewPager(viewPager);
 
         searchbar.setActivityListener(this);
 
@@ -56,6 +68,16 @@ public class SearchActivity extends BaseTransitionActivity
                 }
             });
         }
+    }
+
+    private void setUpViewPager(ViewPager viewPager) {
+        SearchTabAdapter adapter = new SearchTabAdapter(getSupportFragmentManager());
+
+        adapter.addFragment(MoviesListFragment.newInstance(), "MOVIES");
+        adapter.addFragment(ShowsListFragment.newInstance(), "SHOWS");
+
+        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
     }
 
     private boolean isFirstTimeRunning(Bundle savedInstanceState) {

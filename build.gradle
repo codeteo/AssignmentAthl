@@ -37,6 +37,7 @@ buildscript {
                 recyclerView           : "com.android.support:recyclerview-v7:$supportLibrary",
                 picasso                : "com.squareup.picasso:picasso:2.5.2",
                 palette                : "com.android.support:palette-v7:$supportLibrary",
+                designSupport          : "com.android.support:design:$supportLibrary",
 
                 // Animations
                 transitionsSupport      : "com.android.support:transition:$supportLibrary"
