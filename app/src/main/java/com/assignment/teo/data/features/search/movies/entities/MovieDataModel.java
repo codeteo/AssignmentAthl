@@ -15,7 +15,7 @@ public class MovieDataModel {
     private int id;
 
     @SerializedName("vote_average")
-    private int voteAverage;
+    private float voteAverage;
 
     @SerializedName("title")
     private String title;
@@ -28,6 +28,9 @@ public class MovieDataModel {
 
     @SerializedName("overview")
     private String overview;
+
+    @SerializedName("release_date")
+    private String releaseDate;
 
     public int getVoteCount() {
         return voteCount;
@@ -45,11 +48,11 @@ public class MovieDataModel {
         this.id = id;
     }
 
-    public int getVoteAverage() {
+    public float getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(int voteAverage) {
+    public void setVoteAverage(float voteAverage) {
         this.voteAverage = voteAverage;
     }
 
@@ -83,5 +86,13 @@ public class MovieDataModel {
 
     public void setOverview(String overview) {
         this.overview = overview;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 }

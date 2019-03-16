@@ -24,13 +24,11 @@ public class MoviesListPresenter implements MoviesListMVP.Presenter {
 
     @Override
     public void onSearchMovies(String queryText) {
-        Timber.i("PRESENTER - SEARCH - STRING %s", queryText);
-
         disposable.add(
             searchMovies.getMovies(queryText)
                 .subscribe(
-                        movies -> Timber.i("MOVIES-LIST %s", movies),
-                        throwable -> Timber.i("THROWABLE: ", throwable.getCause())));
+                        movies -> view.showsMovies(movies),
+                        throwable -> Timber.i("THROWABLE: %s", throwable.getCause())));
     }
 
     @Override

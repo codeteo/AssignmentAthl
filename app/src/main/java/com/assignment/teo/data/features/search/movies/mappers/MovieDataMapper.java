@@ -20,6 +20,15 @@ public class MovieDataMapper implements Mapper<MovieDataModel, Movie> {
 
     @Override
     public Movie transform(MovieDataModel dataModel) {
-        return null;
+
+        Movie movie = new Movie();
+
+        movie.setTitle(dataModel.getTitle());
+        movie.setOverview(dataModel.getOverview());
+        movie.setRating(Math.round(dataModel.getVoteAverage()));
+        movie.setThumbnail(dataModel.getBackdropPath());
+        movie.setReleaseDate(dataModel.getReleaseDate());
+
+        return movie;
     }
 }

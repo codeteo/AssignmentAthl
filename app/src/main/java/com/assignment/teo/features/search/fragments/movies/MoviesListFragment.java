@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import com.assignment.teo.R;
 import com.assignment.teo.data.bus.events.QueryTextChangeEvent;
 import com.assignment.teo.domain.entities.Movie;
 import com.assignment.teo.features.search.base.BaseTabFragment;
+import com.assignment.teo.features.search.fragments.movies.adapter.MoviesAdapter;
 import com.squareup.otto.Subscribe;
 
 import java.util.List;
@@ -26,8 +29,12 @@ import dagger.android.support.AndroidSupportInjection;
 
 public class MoviesListFragment extends BaseTabFragment implements MoviesListMVP.View {
 
+    private RecyclerView recyclerView;
+
     @Inject
     MoviesListMVP.Presenter presenter;
+
+    private MoviesAdapter adapter;
 
     public static MoviesListFragment newInstance() {
         
@@ -56,7 +63,17 @@ public class MoviesListFragment extends BaseTabFragment implements MoviesListMVP
     }
 
     private void initViews(View view) {
-        // TODO: 16/3/2019
+        recyclerView = view.findViewById(R.id.recyclerview_movies);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setHasFixedSize(true);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (presenter != null) {
+            presenter.unsubscribe();
+        }
     }
 
     @Subscribe
@@ -66,6 +83,11 @@ public class MoviesListFragment extends BaseTabFragment implements MoviesListMVP
 
     @Override
     public void showsMovies(List<Movie> movies) {
-
+        if (isAdded()) {
+            if (adapter == null) {
+                adapter = new MoviesAdapter(movies, getActivity());
+                recyclerView.setAdapter(adapter);
+            }
+        }
     }
 }
