@@ -78,4 +78,5 @@ dependencies {
 
     // Utilities
     implementation libs.timberVersion
+    implementation libs.otto
 }
