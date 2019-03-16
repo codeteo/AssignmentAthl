@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.transition.Transition;
 import android.support.transition.TransitionManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,14 +22,20 @@ import com.assignment.teo.widgets.transitions.SimpleTransitionListener;
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 import timber.log.Timber;
 
 public class SearchActivity extends BaseTransitionActivity
-        implements SearchMVP.View , SearchBar.SimpleToolbarCallback {
+        implements SearchMVP.View , SearchBar.SimpleToolbarCallback, HasSupportFragmentInjector {
 
     private SearchBar searchbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+
+    @Inject
+    DispatchingAndroidInjector<Fragment> fragmentInjector;
 
     @Inject
     SearchMVP.Presenter presenter;
@@ -134,5 +141,10 @@ public class SearchActivity extends BaseTransitionActivity
     public void onTextChanged(String text) {
         Timber.i("SEARCH-ACTIVITY TEXT: %s", text);
         // TODO: 15/3/2019 Call presenter to initiate network request
+    }
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return fragmentInjector;
     }
 }

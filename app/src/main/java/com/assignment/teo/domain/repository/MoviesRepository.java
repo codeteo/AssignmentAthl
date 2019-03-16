@@ -12,7 +12,7 @@ public interface MoviesRepository {
     /**
      * Get an {@link Observable} which will emit a List of {@link Movie}s.
      */
-    Observable<List<Movie>> execute();
+    Observable<List<Movie>> execute(String queryText);
 
     /**
      * Remove RxJava subscriptions.
