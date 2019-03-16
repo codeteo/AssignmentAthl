@@ -17,10 +17,10 @@ abstract class MoviesListPresenterModule {
 
     @FragmentScope
     @Binds
-    abstract MoviesListMVP.View providesPopularFragment(MoviesListFragment fragment);
+    abstract MoviesListMVP.View providesMoviesListFragment(MoviesListFragment fragment);
 
     @FragmentScope
     @Binds
-    abstract MoviesListMVP.Presenter providesSearchMoviesPresenter(MoviesListPresenter presenter);
+    abstract MoviesListMVP.Presenter providesMoviesListPresenter(MoviesListPresenter presenter);
 
 }

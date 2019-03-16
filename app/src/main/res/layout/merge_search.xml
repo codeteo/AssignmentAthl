@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:hint="@string/hint_search_for_stuff"
-        android:imeOptions="actionSearch"
+        android:imeOptions="actionSearch|flagNoExtractUi"
         android:inputType="text"
         android:maxLines="1" />
 

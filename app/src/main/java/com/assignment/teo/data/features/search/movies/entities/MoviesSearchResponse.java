@@ -1,9 +1,10 @@
 package com.assignment.teo.data.features.search.movies.entities;
 
+import com.assignment.teo.data.features.search.movies.MoviesSearchService;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Movie object used in the data layer.
+ * Response object from {@link MoviesSearchService} used in the data layer.
  */
 
 public class MoviesSearchResponse {

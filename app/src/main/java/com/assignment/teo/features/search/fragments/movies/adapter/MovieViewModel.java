@@ -2,6 +2,8 @@ package com.assignment.teo.features.search.fragments.movies.adapter;
 
 import com.assignment.teo.domain.entities.Movie;
 
+import static com.assignment.teo.Constants.EMPTY_STRING;
+
 /**
  * ViewModel for the movie view in {@link MoviesAdapter}.
  */
@@ -15,11 +17,7 @@ public final class MovieViewModel {
     }
 
     public String getTitle() {
-        if (movie.getTitle() == null) {
-            return "";
-        } else {
-            return movie.getTitle();
-        }
+        return movie.getTitle() == null ? EMPTY_STRING : movie.getTitle();
     }
 
     public String getOverview() {

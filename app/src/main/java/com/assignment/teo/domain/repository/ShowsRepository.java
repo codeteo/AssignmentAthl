@@ -10,8 +10,10 @@ public interface ShowsRepository {
 
     /**
      * Get an {@link Observable} which will emit a List of {@link Show}s.
+     *
+     * @param queryText user's search string.
      */
-    Observable<List<Show>> execute();
+    Observable<List<Show>> execute(String queryText);
 
     /**
      * Remove RxJava subscriptions.

@@ -82,7 +82,7 @@ public class MoviesListFragment extends BaseTabFragment implements MoviesListMVP
     }
 
     @Override
-    public void showsMovies(List<Movie> movies) {
+    public void showMovies(List<Movie> movies) {
         if (isAdded()) {
             if (adapter == null) {
                 adapter = new MoviesAdapter(movies, getActivity());

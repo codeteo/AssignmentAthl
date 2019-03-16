@@ -27,7 +27,7 @@ public class MoviesListPresenter implements MoviesListMVP.Presenter {
         disposable.add(
             searchMovies.getMovies(queryText)
                 .subscribe(
-                        movies -> view.showsMovies(movies),
+                        movies -> view.showMovies(movies),
                         throwable -> Timber.i("THROWABLE: %s", throwable.getCause())));
     }
 

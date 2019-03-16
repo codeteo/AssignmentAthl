@@ -12,7 +12,7 @@ public interface MoviesListMVP {
 
     interface View {
 
-        void showsMovies(List<Movie> movies);
+        void showMovies(List<Movie> movies);
 
     }
 
