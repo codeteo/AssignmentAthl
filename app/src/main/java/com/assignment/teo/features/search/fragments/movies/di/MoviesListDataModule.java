@@ -26,8 +26,6 @@ import static com.assignment.teo.utils.Qualifiers.API_KEY;
 @Module
 public class MoviesListDataModule {
 
-    // service, repository, remoteDS, localDS, useCase
-
     @FragmentScope
     @Provides
     MoviesSearchService providesMoviesSearchService(Retrofit retrofit) {

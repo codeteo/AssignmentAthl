@@ -12,6 +12,8 @@ import android.view.ViewTreeObserver;
 
 import com.assignment.teo.R;
 import com.assignment.teo.common.base.BaseTransitionActivity;
+import com.assignment.teo.data.bus.BusProvider;
+import com.assignment.teo.data.bus.events.QueryTextChangeEvent;
 import com.assignment.teo.features.search.fragments.movies.MoviesListFragment;
 import com.assignment.teo.features.search.fragments.shows.ShowsListFragment;
 import com.assignment.teo.features.search.views.SearchBar;
@@ -139,8 +141,7 @@ public class SearchActivity extends BaseTransitionActivity
 
     @Override
     public void onTextChanged(String text) {
-        Timber.i("SEARCH-ACTIVITY TEXT: %s", text);
-        // TODO: 15/3/2019 Call presenter to initiate network request
+        BusProvider.getInstance().post(new QueryTextChangeEvent(text));
     }
 
     @Override

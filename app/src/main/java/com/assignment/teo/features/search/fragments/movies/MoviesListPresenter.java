@@ -5,6 +5,8 @@ import com.assignment.teo.domain.SearchMoviesUseCase;
 
 import javax.inject.Inject;
 
+import timber.log.Timber;
+
 @FragmentScope
 public class MoviesListPresenter implements MoviesListMVP.Presenter {
 
@@ -12,7 +14,7 @@ public class MoviesListPresenter implements MoviesListMVP.Presenter {
     private MoviesListMVP.View view;
 
     @Inject
-    public MoviesListPresenter(SearchMoviesUseCase searchMovies, MoviesListMVP.View view) {
+    MoviesListPresenter(SearchMoviesUseCase searchMovies, MoviesListMVP.View view) {
         this.searchMovies = searchMovies;
         this.view = view;
     }
@@ -20,5 +22,6 @@ public class MoviesListPresenter implements MoviesListMVP.Presenter {
     @Override
     public void onSearchMovies(String queryText) {
 //        searchMovies.getMovies()
+        Timber.i("PRESENTER - SEARCH - STRING %s", queryText);
     }
 }

@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
+import com.assignment.teo.R;
 import com.assignment.teo.data.bus.events.QueryTextChangeEvent;
 import com.assignment.teo.domain.entities.Movie;
 import com.assignment.teo.features.search.base.BaseTabFragment;
@@ -44,13 +46,22 @@ public class MoviesListFragment extends BaseTabFragment implements MoviesListMVP
 
     @Nullable
     @Override
-    public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public android.view.View onCreateView(@NonNull LayoutInflater inflater,
+                                  @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_movies_list, container, false);
+
+        initViews(view);
+
+        return view;
+    }
+
+    private void initViews(View view) {
+        // TODO: 16/3/2019
     }
 
     @Subscribe
     public void onQueryTextChanged(QueryTextChangeEvent event) {
-
+        presenter.onSearchMovies(event.getQueryText());
     }
 
     @Override
