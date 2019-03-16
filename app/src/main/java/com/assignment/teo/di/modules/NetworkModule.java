@@ -1,8 +1,6 @@
 package com.assignment.teo.di.modules;
 
 import com.assignment.teo.utils.BaseUrlInterceptor;
-import com.assignment.teo.utils.schedulers.BaseSchedulerProvider;
-import com.assignment.teo.utils.schedulers.SchedulerProvider;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -63,12 +61,6 @@ public class NetworkModule {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-    }
-
-    @Provides
-    @Singleton
-    BaseSchedulerProvider baseSchedulerProvider() {
-        return SchedulerProvider.getInstance();
     }
 
 }

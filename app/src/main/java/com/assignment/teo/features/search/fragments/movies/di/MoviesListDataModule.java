@@ -24,7 +24,7 @@ import static com.assignment.teo.utils.Qualifiers.API_KEY;
  */
 
 @Module
-class MoviesListDataModule {
+public class MoviesListDataModule {
 
     // service, repository, remoteDS, localDS, useCase
 
