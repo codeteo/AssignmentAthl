@@ -20,6 +20,8 @@ public interface MoviesListMVP {
 
         void onSearchMovies(String queryText);
 
+        void unsubscribe();
+
     }
 
 }

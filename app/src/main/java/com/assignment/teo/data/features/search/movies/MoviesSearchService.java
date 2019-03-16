@@ -14,7 +14,7 @@ public interface MoviesSearchService {
      * @see <a href="https://developers.themoviedb.org/3/search/search-movies">documentation</a>
      */
 
-    @POST("/search/movie")
+    @POST("search/movie")
     Observable<MoviesSearchResponse> searchMovies(
             @Query("api_key") String apiKey, @Query("query") String query);
 
