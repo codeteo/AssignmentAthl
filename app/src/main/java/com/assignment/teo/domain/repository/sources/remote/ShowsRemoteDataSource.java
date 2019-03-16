@@ -30,7 +30,7 @@ public class ShowsRemoteDataSource implements ShowsDataSource {
 
     @Override
     public Observable<ShowsSearchResponse> shows(String queryText) {
-        return service.searchShows(apiKey, queryText);
+        return service.searchShows(apiKey, queryText, "false", "en-US");
     }
 }
 

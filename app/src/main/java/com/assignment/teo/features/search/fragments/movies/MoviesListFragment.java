@@ -78,6 +78,10 @@ public class MoviesListFragment extends BaseTabFragment implements MoviesListMVP
 
     @Subscribe
     public void onQueryTextChanged(QueryTextChangeEvent event) {
+        if (adapter != null) {
+            adapter.clearDataset();
+        }
+
         presenter.onSearchMovies(event.getQueryText());
     }
 
@@ -86,8 +90,10 @@ public class MoviesListFragment extends BaseTabFragment implements MoviesListMVP
         if (isAdded()) {
             if (adapter == null) {
                 adapter = new MoviesAdapter(movies, getActivity());
-                recyclerView.setAdapter(adapter);
+            } else {
+                adapter.setDataset(movies);
             }
+            recyclerView.setAdapter(adapter);
         }
     }
 }

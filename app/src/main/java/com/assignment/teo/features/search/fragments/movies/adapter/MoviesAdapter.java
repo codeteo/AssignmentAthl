@@ -45,4 +45,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         return dataset.size();
     }
 
+    public void clearDataset() {
+        dataset.clear();
+        notifyDataSetChanged();
+    }
+
+    public void setDataset(List<Movie> dataset) {
+        this.dataset = dataset;
+        notifyDataSetChanged();
+    }
+
 }

@@ -45,5 +45,15 @@ public class ShowsAdapter extends RecyclerView.Adapter<ShowViewHolder> {
         return dataset.size();
     }
 
+    public void clearDataset() {
+        dataset.clear();
+        notifyDataSetChanged();
+    }
+
+    public void setDataset(List<Show> dataset) {
+        this.dataset = dataset;
+        notifyDataSetChanged();
+    }
+
 }
 

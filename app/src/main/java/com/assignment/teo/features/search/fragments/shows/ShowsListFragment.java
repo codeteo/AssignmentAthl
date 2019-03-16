@@ -78,6 +78,10 @@ public class ShowsListFragment extends BaseTabFragment implements ShowsListMVP.V
 
     @Subscribe
     public void onQueryTextChanged(QueryTextChangeEvent event) {
+        if (adapter != null) {
+            adapter.clearDataset();
+        }
+
         presenter.onSearchShows(event.getQueryText());
     }
 
@@ -86,8 +90,10 @@ public class ShowsListFragment extends BaseTabFragment implements ShowsListMVP.V
         if (isAdded()) {
             if (adapter == null) {
                 adapter = new ShowsAdapter(shows, getActivity());
-                recyclerView.setAdapter(adapter);
+            } else {
+                adapter.setDataset(shows);
             }
+            recyclerView.setAdapter(adapter);
         }
     }
 }

@@ -16,6 +16,7 @@ public interface ShowsSearchService {
 
     @POST("search/tv")
     Observable<ShowsSearchResponse> searchShows(
-            @Query("api_key") String apiKey, @Query("query") String query);
+            @Query("api_key") String apiKey, @Query("query") String query,
+            @Query("include_adult") String includeAdult, @Query("language") String language);
 
 }

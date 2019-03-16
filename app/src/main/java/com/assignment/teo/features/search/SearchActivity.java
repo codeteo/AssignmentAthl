@@ -85,8 +85,8 @@ public class SearchActivity extends BaseTransitionActivity
         adapter.addFragment(MoviesListFragment.newInstance(), "MOVIES");
         adapter.addFragment(ShowsListFragment.newInstance(), "SHOWS");
 
+        viewPager.setOffscreenPageLimit(1);
         viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(3);
     }
 
     private boolean isFirstTimeRunning(Bundle savedInstanceState) {

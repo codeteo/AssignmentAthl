@@ -56,6 +56,7 @@ public class ShowViewHolder extends BaseViewHolder<ShowViewModel> {
         return new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                ivPoster.setImageBitmap(null);
                 ivPoster.setImageBitmap(bitmap);
 
                 Palette.from(bitmap)
@@ -71,12 +72,12 @@ public class ShowViewHolder extends BaseViewHolder<ShowViewModel> {
 
             @Override
             public void onBitmapFailed(Drawable errorDrawable) {
-
+                ivPoster.setImageBitmap(null);
             }
 
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
-
+                ivPoster.setImageBitmap(null);
             }
         };
     }

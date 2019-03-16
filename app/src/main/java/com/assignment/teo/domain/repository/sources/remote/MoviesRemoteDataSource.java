@@ -30,6 +30,6 @@ public class MoviesRemoteDataSource implements MoviesDataSource {
 
     @Override
     public Observable<MoviesSearchResponse> movies(String queryText) {
-        return service.searchMovies(apiKey, queryText);
+        return service.searchMovies(apiKey, queryText, "false", "en-us");
     }
 }
