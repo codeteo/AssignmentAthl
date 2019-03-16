@@ -7,6 +7,8 @@ import com.assignment.teo.Constants;
 import com.assignment.teo.data.preferences.SharedPreferencesManagerImpl;
 import com.assignment.teo.utils.BaseUrlInterceptor;
 import com.assignment.teo.utils.NetworkUtils;
+import com.assignment.teo.utils.schedulers.BaseSchedulerProvider;
+import com.assignment.teo.utils.schedulers.SchedulerProvider;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -60,5 +62,11 @@ public abstract class ApplicationModule {
     @Singleton
     static NetworkUtils providesNetworkUtils(Context context) {
         return new NetworkUtils(context);
+    }
+
+    @Provides
+    @Singleton
+    static BaseSchedulerProvider providesBaseSchedulerProvider() {
+        return SchedulerProvider.getInstance();
     }
 }

@@ -1,14 +1,21 @@
 package com.assignment.teo.features.search;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.transition.Transition;
 import android.support.transition.TransitionManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 
 import com.assignment.teo.R;
 import com.assignment.teo.common.base.BaseTransitionActivity;
+import com.assignment.teo.data.bus.BusProvider;
+import com.assignment.teo.data.bus.events.QueryTextChangeEvent;
+import com.assignment.teo.features.search.fragments.movies.MoviesListFragment;
+import com.assignment.teo.features.search.fragments.shows.ShowsListFragment;
 import com.assignment.teo.features.search.views.SearchBar;
 import com.assignment.teo.widgets.transitions.FadeInTransition;
 import com.assignment.teo.widgets.transitions.FadeOutTransition;
@@ -17,12 +24,20 @@ import com.assignment.teo.widgets.transitions.SimpleTransitionListener;
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 import timber.log.Timber;
 
 public class SearchActivity extends BaseTransitionActivity
-        implements SearchMVP.View , SearchBar.SimpleToolbarCallback {
+        implements SearchMVP.View , SearchBar.SimpleToolbarCallback, HasSupportFragmentInjector {
 
     private SearchBar searchbar;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+
+    @Inject
+    DispatchingAndroidInjector<Fragment> fragmentInjector;
 
     @Inject
     SearchMVP.Presenter presenter;
@@ -35,6 +50,12 @@ public class SearchActivity extends BaseTransitionActivity
 
         searchbar = findViewById(R.id.search_toolbar);
         setSupportActionBar(searchbar);
+
+        viewPager = findViewById(R.id.viewpager);
+        setUpViewPager(viewPager);
+
+        tabLayout = findViewById(R.id.tablayout);
+        tabLayout.setupWithViewPager(viewPager);
 
         searchbar.setActivityListener(this);
 
@@ -56,6 +77,16 @@ public class SearchActivity extends BaseTransitionActivity
                 }
             });
         }
+    }
+
+    private void setUpViewPager(ViewPager viewPager) {
+        SearchTabAdapter adapter = new SearchTabAdapter(getSupportFragmentManager());
+
+        adapter.addFragment(MoviesListFragment.newInstance(), "MOVIES");
+        adapter.addFragment(ShowsListFragment.newInstance(), "SHOWS");
+
+        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
     }
 
     private boolean isFirstTimeRunning(Bundle savedInstanceState) {
@@ -110,7 +141,11 @@ public class SearchActivity extends BaseTransitionActivity
 
     @Override
     public void onTextChanged(String text) {
-        Timber.i("SEARCH-ACTIVITY TEXT: %s", text);
-        // TODO: 15/3/2019 Call presenter to initiate network request
+        BusProvider.getInstance().post(new QueryTextChangeEvent(text));
+    }
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return fragmentInjector;
     }
 }

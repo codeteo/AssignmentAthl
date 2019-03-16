@@ -19,8 +19,16 @@ public class ShowDataMapper implements Mapper<ShowDataModel, Show> {
     }
 
     @Override
-    public Show transform(ShowDataModel showDataModel) {
-        return null;
+    public Show transform(ShowDataModel dataModel) {
+
+        Show show = new Show();
+
+        show.setTitle(dataModel.getTitle());
+        show.setOverview(dataModel.getOverview());
+        show.setRating(Math.round(dataModel.getVoteAverage()));
+        show.setThumbnail(dataModel.getBackdropPath());
+
+        return show;
     }
 }
 

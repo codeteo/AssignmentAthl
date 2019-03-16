@@ -3,7 +3,6 @@ package com.assignment.teo.data.features.search.shows;
 import com.assignment.teo.data.features.search.shows.entities.ShowsSearchResponse;
 
 import io.reactivex.Observable;
-import retrofit2.Response;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -15,8 +14,8 @@ public interface ShowsSearchService {
      * @see <a href="https://developers.themoviedb.org/3/search/search-tv-shows">documentation</a>
      */
 
-    @POST("/search/tv")
-    Observable<Response<ShowsSearchResponse>> searchShows(
+    @POST("search/tv")
+    Observable<ShowsSearchResponse> searchShows(
             @Query("api_key") String apiKey, @Query("query") String query);
 
 }

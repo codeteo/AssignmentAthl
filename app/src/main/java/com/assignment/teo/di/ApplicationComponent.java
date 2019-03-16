@@ -5,6 +5,7 @@ import android.app.Application;
 import com.assignment.teo.MyApplication;
 import com.assignment.teo.di.builders.ActivityBindingModule;
 import com.assignment.teo.di.modules.ApplicationModule;
+import com.assignment.teo.di.modules.NetworkModule;
 
 import javax.inject.Singleton;
 
@@ -21,7 +22,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Component(modules = {
         AndroidSupportInjectionModule.class,
         ActivityBindingModule.class,
-        ApplicationModule.class })
+        ApplicationModule.class,
+        NetworkModule.class})
 public interface ApplicationComponent extends AndroidInjector<MyApplication> {
 
     @Component.Builder

@@ -10,7 +10,7 @@ import io.reactivex.Observable;
 
 public interface SearchMoviesUseCase {
 
-    Observable<List<Movie>> getMovies();
+    Observable<List<Movie>> getMovies(String queryText);
 
     void unsubscribe();
 }

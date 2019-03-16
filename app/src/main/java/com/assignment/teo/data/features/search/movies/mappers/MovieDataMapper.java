@@ -8,10 +8,10 @@ import javax.inject.Inject;
 
 /**
  * Mapper class to transform data from the data layer ({@link MovieDataModel})
- * to items in the domain layer ({@link Movie}).
+ * to objects in the domain layer ({@link Movie}).
  */
 
-public class MovieDataMapper implements Mapper<MovieDataMapper, Movie> {
+public class MovieDataMapper implements Mapper<MovieDataModel, Movie> {
 
     @Inject
     MovieDataMapper() {
@@ -19,7 +19,16 @@ public class MovieDataMapper implements Mapper<MovieDataMapper, Movie> {
     }
 
     @Override
-    public Movie transform(MovieDataMapper movieDataMapper) {
-        return null;
+    public Movie transform(MovieDataModel dataModel) {
+
+        Movie movie = new Movie();
+
+        movie.setTitle(dataModel.getTitle());
+        movie.setOverview(dataModel.getOverview());
+        movie.setRating(Math.round(dataModel.getVoteAverage()));
+        movie.setThumbnail(dataModel.getBackdropPath());
+        movie.setReleaseDate(dataModel.getReleaseDate());
+
+        return movie;
     }
 }

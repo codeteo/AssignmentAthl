@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <!-- Tabs -->
+    <color name="search_tabs_color">#2d2f3b</color>
+
 </resources>
