@@ -3,6 +3,11 @@
     <dimen name="toolbar_height">64dp</dimen>
     <dimen name="toolbar_margin">8dp</dimen>
 
+    <!-- Search screen -->
     <dimen name="item_movie_bottom_padding">16dp</dimen>
     <dimen name="item_movie_side_padding">8dp</dimen>
+
+    <!-- Details Screen -->
+    <dimen name="detail_overview_textsize">16sp</dimen>
+
 </resources>

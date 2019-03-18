@@ -7,11 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.assignment.teo.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
+
+import butterknife.BindView;
 
 import static com.assignment.teo.Constants.EMPTY_STRING;
 import static com.assignment.teo.Constants.appendImageUrl;
@@ -22,14 +25,20 @@ import static com.assignment.teo.Constants.appendImageUrl;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    public static final String TITLE_KEY = "title";
-    public static final String IMG_URL_KEY = "image_url";
-    public static final String OVERVIEW_KEY = "overview";
-    public static final String GENRE_ID_KEY = "genre_id";
+    public static final String TITLE_INTENT_KEY = "title";
+    public static final String IMG_URL_INTENT_KEY = "image_url";
+    public static final String OVERVIEW_INTENT_KEY = "overview";
+    public static final String GENRE_ID_INTENT_KEY = "genre_id";
 
-    private Toolbar toolbar;
-    private CollapsingToolbarLayout collapsingToolbar;
-    private ImageView ivImage;
+    private static final String TITLE_KEY = "title_tag";
+    private static final String IMAGE_URL_KEY = "image_url_tag";
+    private static final String OVERVIEW_KEY = "overview_tag";
+    private static final String GENRE_ID_KEY = "genre_id_tag";
+
+    @BindView(R.id.toolbar_details) Toolbar toolbar;
+    @BindView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
+    @BindView(R.id.iv_details_backdrop) ImageView ivImage;
+    @BindView(R.id.tv_details_overview) TextView tvOverview;
 
     private String title, imageUrl, overview;
     private int genreId;
@@ -39,28 +48,16 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        toolbar = findViewById(R.id.toolbar_details);
-        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-        ivImage = findViewById(R.id.iv_details_backdrop);
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            title = extras.getString(TITLE_KEY, EMPTY_STRING);
-            imageUrl = extras.getString(IMG_URL_KEY, EMPTY_STRING);
-            overview = extras.getString(OVERVIEW_KEY, EMPTY_STRING);
-            genreId = extras.getInt(GENRE_ID_KEY, 0);
+        if (savedInstanceState == null) {
+            getExtras();
+        } else {
+            title = savedInstanceState.getString(TITLE_KEY);
+            imageUrl = savedInstanceState.getString(IMAGE_URL_KEY);
+            overview = savedInstanceState.getString(OVERVIEW_KEY);
+            genreId = savedInstanceState.getInt(GENRE_ID_KEY);
         }
 
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
-        Picasso.with(this)
-                .load(appendImageUrl(imageUrl))
-                .fit()
-                .error(R.drawable.placeholder_movie)
-                .into(ivImage);
-
-        collapsingToolbar.setTitle(title);
+        setupViews();
     }
 
     @Override
@@ -72,4 +69,38 @@ public class DetailsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(TITLE_KEY, title);
+        outState.putString(OVERVIEW_KEY, overview);
+        outState.putString(IMAGE_URL_KEY, imageUrl);
+        outState.putInt(GENRE_ID_KEY, genreId);
+    }
+
+    private void setupViews() {
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        collapsingToolbar.setTitle(title);
+        tvOverview.setText(overview);
+
+        Picasso.with(this)
+                .load(appendImageUrl(imageUrl))
+                .fit()
+                .error(R.drawable.placeholder_movie)
+                .into(ivImage);
+    }
+
+    private void getExtras() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            title = extras.getString(TITLE_INTENT_KEY, EMPTY_STRING);
+            imageUrl = extras.getString(IMG_URL_INTENT_KEY, EMPTY_STRING);
+            overview = extras.getString(OVERVIEW_INTENT_KEY, EMPTY_STRING);
+            genreId = extras.getInt(GENRE_ID_INTENT_KEY, 0);
+        }
+    }
+
 }
