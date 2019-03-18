@@ -1,6 +1,7 @@
 package com.assignment.teo.features.search;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.transition.Transition;
 import android.support.transition.TransitionManager;
@@ -14,12 +15,18 @@ import com.assignment.teo.R;
 import com.assignment.teo.common.base.BaseTransitionActivity;
 import com.assignment.teo.data.bus.BusProvider;
 import com.assignment.teo.data.bus.events.QueryTextChangeEvent;
+import com.assignment.teo.domain.entities.Movie;
+import com.assignment.teo.domain.entities.Show;
 import com.assignment.teo.features.search.fragments.movies.MoviesListFragment;
 import com.assignment.teo.features.search.fragments.shows.ShowsListFragment;
 import com.assignment.teo.features.search.views.SearchBar;
+import com.assignment.teo.utils.RetainedFragment;
 import com.assignment.teo.widgets.transitions.FadeInTransition;
 import com.assignment.teo.widgets.transitions.FadeOutTransition;
 import com.assignment.teo.widgets.transitions.SimpleTransitionListener;
+
+import java.util.Collections;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -29,8 +36,16 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 import timber.log.Timber;
 
+import static com.assignment.teo.Constants.EMPTY_STRING;
+import static com.assignment.teo.utils.RetainedFragment.RETAINED_FRAGMENT_TAG;
+
 public class SearchActivity extends BaseTransitionActivity
         implements SearchMVP.View , SearchBar.SimpleToolbarCallback, HasSupportFragmentInjector {
+
+    private static final String MOVIES_TITLE = "MOVIES";
+    private static final String SHOWS_TITLE = "SHOWS";
+
+    public static final String SEARCH_STRING_LAST_VALUE_KEY = "last_value_key";
 
     private SearchBar searchbar;
     private ViewPager viewPager;
@@ -41,6 +56,10 @@ public class SearchActivity extends BaseTransitionActivity
 
     @Inject
     SearchMVP.Presenter presenter;
+
+    private RetainedFragment retainedFragment;
+
+    private String lastSearchedString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +72,20 @@ public class SearchActivity extends BaseTransitionActivity
 
         viewPager = findViewById(R.id.viewpager);
         setUpViewPager(viewPager, savedInstanceState);
+
+        if (isFirstTimeRunning(savedInstanceState)) {
+            retainedFragment = new RetainedFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(retainedFragment, RETAINED_FRAGMENT_TAG)
+                    .commit();
+        } else {
+
+            lastSearchedString = savedInstanceState
+                    .getString(SEARCH_STRING_LAST_VALUE_KEY, EMPTY_STRING);
+
+            retainedFragment = (RetainedFragment) getSupportFragmentManager()
+                    .findFragmentByTag(RETAINED_FRAGMENT_TAG);
+        }
 
         tabLayout = findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
@@ -87,9 +120,9 @@ public class SearchActivity extends BaseTransitionActivity
             adapter.addFragment(ShowsListFragment.newInstance());
         } else {
             adapter.addFragment((MoviesListFragment) getSupportFragmentManager()
-                    .getFragment(savedInstanceState, "MOVIES"));
+                    .getFragment(savedInstanceState, MOVIES_TITLE));
             adapter.addFragment((ShowsListFragment) getSupportFragmentManager()
-                    .getFragment(savedInstanceState, "SHOWS"));
+                    .getFragment(savedInstanceState, SHOWS_TITLE));
         }
 
         viewPager.setOffscreenPageLimit(1);
@@ -140,6 +173,7 @@ public class SearchActivity extends BaseTransitionActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putString(SEARCH_STRING_LAST_VALUE_KEY, lastSearchedString);
     }
 
     @Override
@@ -147,9 +181,37 @@ public class SearchActivity extends BaseTransitionActivity
         Timber.i("SHOW MESSAGE");
     }
 
+    /**
+     * Receives the search text and sends it with an event to movies and shows
+     * Fragments.
+     * Also it compares the text with the last saved search string and in case
+     * they are equal then it's probably a configuration change so there is no
+     * need to notify the two Fragments.
+     */
     @Override
     public void onTextChanged(String text) {
-        BusProvider.getInstance().post(new QueryTextChangeEvent(text));
+        if (!lastSearchedString.equals(text)) {
+            lastSearchedString = text;
+            BusProvider.getInstance().post(new QueryTextChangeEvent(text));
+        }
+    }
+
+    @NonNull
+    public List<Movie> getMovies() {
+        if (retainedFragment.getMovies() != null) {
+            return retainedFragment.getMovies();
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    @NonNull
+    public List<Show> getShows() {
+        if (retainedFragment.getShows() != null) {
+            return retainedFragment.getShows();
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     @Override

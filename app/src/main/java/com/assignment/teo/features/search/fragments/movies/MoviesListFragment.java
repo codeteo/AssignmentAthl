@@ -11,9 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.assignment.teo.R;
+import com.assignment.teo.common.base.BaseFragment;
 import com.assignment.teo.data.bus.events.QueryTextChangeEvent;
 import com.assignment.teo.domain.entities.Movie;
-import com.assignment.teo.features.search.base.BaseTabFragment;
+import com.assignment.teo.features.search.SearchActivity;
 import com.assignment.teo.features.search.fragments.movies.adapter.MoviesAdapter;
 import com.squareup.otto.Subscribe;
 
@@ -27,7 +28,7 @@ import dagger.android.support.AndroidSupportInjection;
  * Displays list of movies in search screen.
  */
 
-public class MoviesListFragment extends BaseTabFragment implements MoviesListMVP.View {
+public class MoviesListFragment extends BaseFragment implements MoviesListMVP.View {
 
     private RecyclerView recyclerView;
 
@@ -53,11 +54,15 @@ public class MoviesListFragment extends BaseTabFragment implements MoviesListMVP
 
     @Nullable
     @Override
-    public android.view.View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(@NonNull LayoutInflater inflater,
                                   @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movies_list, container, false);
 
         initViews(view);
+
+        if (savedInstanceState != null) {
+            showMovies(((SearchActivity) getActivity()).getMovies());
+        }
 
         return view;
     }

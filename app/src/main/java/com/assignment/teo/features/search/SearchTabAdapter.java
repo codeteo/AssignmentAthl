@@ -1,10 +1,10 @@
 package com.assignment.teo.features.search;
 
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.assignment.teo.features.search.base.BaseTabFragment;
+import com.assignment.teo.common.base.BaseFragment;
 import com.assignment.teo.features.search.fragments.movies.MoviesListFragment;
 import com.assignment.teo.features.search.fragments.shows.ShowsListFragment;
 
@@ -18,7 +18,7 @@ import java.util.List;
 class SearchTabAdapter extends FragmentStatePagerAdapter {
 
     private static final int NUM_OF_TABS = 2;
-    private final List<BaseTabFragment> fragmentList = new ArrayList<>();
+    private final List<BaseFragment> fragmentList = new ArrayList<>();
 
     SearchTabAdapter(FragmentManager fm) {
         super(fm);
@@ -53,7 +53,7 @@ class SearchTabAdapter extends FragmentStatePagerAdapter {
         }
     }
 
-    void addFragment(BaseTabFragment fragment) {
+    void addFragment(BaseFragment fragment) {
         fragmentList.add(fragment);
     }
 

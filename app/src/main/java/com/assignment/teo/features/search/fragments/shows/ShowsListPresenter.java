@@ -1,5 +1,7 @@
 package com.assignment.teo.features.search.fragments.shows;
 
+import com.assignment.teo.data.bus.BusProvider;
+import com.assignment.teo.data.bus.events.StoreShowsEvent;
 import com.assignment.teo.di.scopes.FragmentScope;
 import com.assignment.teo.domain.SearchShowsUseCase;
 
@@ -28,7 +30,10 @@ public class ShowsListPresenter implements ShowsListMVP.Presenter {
         disposable.add(
                 searchShows.getShows(queryText)
                         .subscribe(
-                                movies -> view.showTvShows(movies),
+                                shows ->  {
+                                    view.showTvShows(shows);
+                                    BusProvider.getInstance().post(new StoreShowsEvent(shows));
+                                },
                                 throwable -> Timber.i("THROWABLE: %s", throwable.getCause())));
     }
 

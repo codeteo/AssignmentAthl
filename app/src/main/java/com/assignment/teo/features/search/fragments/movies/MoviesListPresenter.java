@@ -1,5 +1,7 @@
 package com.assignment.teo.features.search.fragments.movies;
 
+import com.assignment.teo.data.bus.BusProvider;
+import com.assignment.teo.data.bus.events.StoreMoviesEvent;
 import com.assignment.teo.di.scopes.FragmentScope;
 import com.assignment.teo.domain.SearchMoviesUseCase;
 
@@ -27,7 +29,10 @@ public class MoviesListPresenter implements MoviesListMVP.Presenter {
         disposable.add(
             searchMovies.getMovies(queryText)
                 .subscribe(
-                        movies -> view.showMovies(movies),
+                        movies -> {
+                            view.showMovies(movies);
+                            BusProvider.getInstance().post(new StoreMoviesEvent(movies));
+                        },
                         throwable -> Timber.i("THROWABLE: %s", throwable.getCause())));
     }
 

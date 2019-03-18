@@ -11,9 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.assignment.teo.R;
+import com.assignment.teo.common.base.BaseFragment;
 import com.assignment.teo.data.bus.events.QueryTextChangeEvent;
 import com.assignment.teo.domain.entities.Show;
-import com.assignment.teo.features.search.base.BaseTabFragment;
+import com.assignment.teo.features.search.SearchActivity;
 import com.assignment.teo.features.search.fragments.shows.adapter.ShowsAdapter;
 import com.squareup.otto.Subscribe;
 
@@ -27,7 +28,7 @@ import dagger.android.support.AndroidSupportInjection;
  * Displays list of shows in search screen.
  */
 
-public class ShowsListFragment extends BaseTabFragment implements ShowsListMVP.View {
+public class ShowsListFragment extends BaseFragment implements ShowsListMVP.View {
 
     private RecyclerView recyclerView;
 
@@ -58,6 +59,10 @@ public class ShowsListFragment extends BaseTabFragment implements ShowsListMVP.V
         View view = inflater.inflate(R.layout.fragment_shows_list, container, false);
 
         initViews(view);
+
+        if (savedInstanceState != null) {
+            showTvShows(((SearchActivity) getActivity()).getShows());
+        }
 
         return view;
     }

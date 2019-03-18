@@ -1,4 +1,4 @@
-package com.assignment.teo.features.search.base;
+package com.assignment.teo.common.base;
 
 import android.support.v4.app.Fragment;
 
@@ -8,7 +8,7 @@ import com.assignment.teo.data.bus.BusProvider;
  * Base class to be extended by all fragments in tabLayout
  */
 
-public abstract class BaseTabFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onResume() {
@@ -22,4 +22,5 @@ public abstract class BaseTabFragment extends Fragment {
         BusProvider.getInstance().unregister(this);
     }
 }
+
 
