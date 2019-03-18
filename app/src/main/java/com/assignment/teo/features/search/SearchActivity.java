@@ -1,5 +1,6 @@
 package com.assignment.teo.features.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -12,11 +13,13 @@ import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 
 import com.assignment.teo.R;
-import com.assignment.teo.common.base.BaseTransitionActivity;
 import com.assignment.teo.data.bus.BusProvider;
+import com.assignment.teo.data.bus.events.OpenDetailsActivityEvent;
 import com.assignment.teo.data.bus.events.QueryTextChangeEvent;
 import com.assignment.teo.domain.entities.Movie;
 import com.assignment.teo.domain.entities.Show;
+import com.assignment.teo.features.details.DetailsActivity;
+import com.assignment.teo.features.search.base.BaseSearchActivity;
 import com.assignment.teo.features.search.fragments.movies.MoviesListFragment;
 import com.assignment.teo.features.search.fragments.shows.ShowsListFragment;
 import com.assignment.teo.features.search.views.SearchBar;
@@ -24,6 +27,7 @@ import com.assignment.teo.utils.RetainedFragment;
 import com.assignment.teo.widgets.transitions.FadeInTransition;
 import com.assignment.teo.widgets.transitions.FadeOutTransition;
 import com.assignment.teo.widgets.transitions.SimpleTransitionListener;
+import com.squareup.otto.Subscribe;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,9 +41,13 @@ import dagger.android.support.HasSupportFragmentInjector;
 import timber.log.Timber;
 
 import static com.assignment.teo.Constants.EMPTY_STRING;
+import static com.assignment.teo.features.details.DetailsActivity.GENRE_ID_KEY;
+import static com.assignment.teo.features.details.DetailsActivity.IMG_URL_KEY;
+import static com.assignment.teo.features.details.DetailsActivity.OVERVIEW_KEY;
+import static com.assignment.teo.features.details.DetailsActivity.TITLE_KEY;
 import static com.assignment.teo.utils.RetainedFragment.RETAINED_FRAGMENT_TAG;
 
-public class SearchActivity extends BaseTransitionActivity
+public class SearchActivity extends BaseSearchActivity
         implements SearchMVP.View , SearchBar.SimpleToolbarCallback, HasSupportFragmentInjector {
 
     private static final String MOVIES_TITLE = "MOVIES";
@@ -212,6 +220,18 @@ public class SearchActivity extends BaseTransitionActivity
         } else {
             return Collections.emptyList();
         }
+    }
+
+    @Subscribe
+    void onOpenDetailsScreenEvent(OpenDetailsActivityEvent event) {
+        Timber.i("EVENT RECEIVED");
+        Intent intent = new Intent(this, DetailsActivity.class);
+        intent.putExtra(TITLE_KEY, event.getTitle());
+        intent.putExtra(IMG_URL_KEY, event.getImageUrl());
+        intent.putExtra(OVERVIEW_KEY, event.getOverview());
+        intent.putExtra(GENRE_ID_KEY, event.getGenreId());
+        startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 
     @Override

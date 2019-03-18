@@ -28,6 +28,7 @@ public class MovieDataMapper implements Mapper<MovieDataModel, Movie> {
         movie.setRating(Math.round(dataModel.getVoteAverage()));
         movie.setThumbnail(dataModel.getBackdropPath());
         movie.setReleaseDate(dataModel.getReleaseDate());
+        movie.setGenreIds(dataModel.getGenreIds());
 
         return movie;
     }

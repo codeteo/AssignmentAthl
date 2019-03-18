@@ -22,6 +22,9 @@ public class ShowDataModel {
     @SerializedName("overview")
     private String overview;
 
+    @SerializedName("genre_ids")
+    private int[] genreIds;
+
     public int getId() {
         return id;
     }
@@ -68,5 +71,13 @@ public class ShowDataModel {
 
     public void setOverview(String overview) {
         this.overview = overview;
+    }
+
+    public int[] getGenreIds() {
+        return genreIds;
+    }
+
+    public void setGenreIds(int[] genreIds) {
+        this.genreIds = genreIds;
     }
 }

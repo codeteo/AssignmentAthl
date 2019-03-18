@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movie_container"
     android:layout_marginBottom="@dimen/item_movie_bottom_padding"
     android:layout_marginLeft="@dimen/item_movie_side_padding"
     android:layout_marginRight="@dimen/item_movie_side_padding"
@@ -9,21 +10,21 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/iv_popular_movie_image"
+        android:id="@+id/iv_movie_image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:contentDescription="@null"
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <TextView
-        android:id="@+id/tv_popular_movie_title"
+        android:id="@+id/tv_movie_title"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:textSize="22sp"
         android:textColor="@android:color/primary_text_dark"
         android:gravity="center"
         android:background="@drawable/shape_bg_drawable_scrim"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_popular_movie_image"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_movie_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Some Fancy Text Title"/>

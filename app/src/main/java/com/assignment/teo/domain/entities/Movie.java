@@ -12,6 +12,7 @@ public class Movie {
     private String releaseDate;
     private String overview;
     private int rating;
+    private int[] genreIds;
 
     public String getTitle() {
         return title;
@@ -51,5 +52,13 @@ public class Movie {
 
     public void setOverview(String overview) {
         this.overview = overview;
+    }
+
+    public int[] getGenreIds() {
+        return genreIds;
+    }
+
+    public void setGenreIds(int[] genreIds) {
+        this.genreIds = genreIds;
     }
 }

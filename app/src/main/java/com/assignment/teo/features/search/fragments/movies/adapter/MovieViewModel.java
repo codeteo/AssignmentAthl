@@ -36,4 +36,8 @@ public final class MovieViewModel {
         return movie.getReleaseDate();
     }
 
+    public int getGenreId() {
+        return movie.getGenreIds()[0];
+    }
+
 }

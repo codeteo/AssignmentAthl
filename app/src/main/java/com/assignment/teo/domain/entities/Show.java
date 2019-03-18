@@ -10,6 +10,7 @@ public class Show {
     private String thumbnail;
     private String overview;
     private int rating;
+    private int[] genreIds;
 
     public String getTitle() {
         return title;
@@ -41,5 +42,13 @@ public class Show {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public int[] getGenreIds() {
+        return genreIds;
+    }
+
+    public void setGenreIds(int[] genreIds) {
+        this.genreIds = genreIds;
     }
 }

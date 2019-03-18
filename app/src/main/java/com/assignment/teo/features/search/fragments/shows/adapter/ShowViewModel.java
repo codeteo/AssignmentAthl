@@ -32,4 +32,7 @@ public final class ShowViewModel {
         return show.getRating();
     }
 
+    public int getGenreId() {
+        return show.getGenreIds()[0];
+    }
 }

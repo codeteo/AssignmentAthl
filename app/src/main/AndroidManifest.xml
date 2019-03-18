@@ -27,6 +27,9 @@
             android:name=".features.search.SearchActivity"
             android:windowSoftInputMode="stateVisible" />
 
+        <activity
+            android:name=".features.details.DetailsActivity"/>
+
     </application>
 
 </manifest>

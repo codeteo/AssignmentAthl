@@ -32,6 +32,9 @@ public class MovieDataModel {
     @SerializedName("release_date")
     private String releaseDate;
 
+    @SerializedName("genre_ids")
+    private int[] genreIds;
+
     public int getVoteCount() {
         return voteCount;
     }
@@ -94,5 +97,13 @@ public class MovieDataModel {
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public int[] getGenreIds() {
+        return genreIds;
+    }
+
+    public void setGenreIds(int[] genreIds) {
+        this.genreIds = genreIds;
     }
 }

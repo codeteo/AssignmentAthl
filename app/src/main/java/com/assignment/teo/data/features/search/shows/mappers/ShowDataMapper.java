@@ -27,6 +27,7 @@ public class ShowDataMapper implements Mapper<ShowDataModel, Show> {
         show.setOverview(dataModel.getOverview());
         show.setRating(Math.round(dataModel.getVoteAverage()));
         show.setThumbnail(dataModel.getBackdropPath());
+        show.setGenreIds(dataModel.getGenreIds());
 
         return show;
     }
