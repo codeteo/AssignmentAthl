@@ -1,6 +1,9 @@
 package com.assignment.teo.di.builders;
 
 import com.assignment.teo.di.scopes.ActivityScope;
+import com.assignment.teo.features.details.DetailsActivity;
+import com.assignment.teo.features.details.di.DetailsActivityModule;
+import com.assignment.teo.features.details.di.DetailsDataModule;
 import com.assignment.teo.features.search.SearchActivity;
 import com.assignment.teo.features.search.di.SearchActivityModule;
 import com.assignment.teo.features.search.fragments.movies.di.MoviesListFragmentBuilder;
@@ -18,7 +21,17 @@ public abstract class ActivityBindingModule {
             modules = {
                     SearchActivityModule.class,
                     MoviesListFragmentBuilder.class,
-                    ShowsListFragmentBuilder.class})
-
+                    ShowsListFragmentBuilder.class}
+    )
     abstract SearchActivity bindSearchActivity();
+
+    @ActivityScope
+    @ContributesAndroidInjector(
+            modules = {
+                    DetailsActivityModule.class,
+                    DetailsDataModule.class
+            }
+    )
+    abstract DetailsActivity bindDetailsActivity();
+
 }

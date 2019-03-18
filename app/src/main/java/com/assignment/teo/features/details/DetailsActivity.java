@@ -10,11 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.assignment.teo.R;
+import com.assignment.teo.domain.entities.Genre;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 
 import static com.assignment.teo.Constants.EMPTY_STRING;
 import static com.assignment.teo.Constants.appendImageUrl;
@@ -23,7 +28,7 @@ import static com.assignment.teo.Constants.appendImageUrl;
  * Screen displaying details about a movie or a show.
  */
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity implements DetailsMVP.View {
 
     public static final String TITLE_INTENT_KEY = "title";
     public static final String IMG_URL_INTENT_KEY = "image_url";
@@ -40,13 +45,18 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.iv_details_backdrop) ImageView ivImage;
     @BindView(R.id.tv_details_overview) TextView tvOverview;
 
+    @Inject
+    DetailsMVP.Presenter presenter;
+
     private String title, imageUrl, overview;
     private int genreId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        ButterKnife.bind(this);
 
         if (savedInstanceState == null) {
             getExtras();
@@ -58,6 +68,8 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         setupViews();
+
+        presenter.onLoadMovieGenre();
     }
 
     @Override
@@ -103,4 +115,8 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void showGenre(Genre genre) {
+
+    }
 }
