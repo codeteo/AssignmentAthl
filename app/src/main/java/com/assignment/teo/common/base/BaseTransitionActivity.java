@@ -2,6 +2,7 @@ package com.assignment.teo.common.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.inputmethod.InputMethodManager;
 
@@ -22,6 +23,10 @@ public abstract class BaseTransitionActivity extends AppCompatActivity {
     protected void showKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         Objects.requireNonNull(imm).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+    }
+
+    protected boolean isFirstTimeRunning(Bundle savedInstanceState) {
+        return savedInstanceState == null;
     }
 
 }

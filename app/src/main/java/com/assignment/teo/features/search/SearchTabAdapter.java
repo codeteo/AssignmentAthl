@@ -53,7 +53,7 @@ class SearchTabAdapter extends FragmentStatePagerAdapter {
         }
     }
 
-    void addFragment(BaseTabFragment fragment, String title) {
+    void addFragment(BaseTabFragment fragment) {
         fragmentList.add(fragment);
     }
 

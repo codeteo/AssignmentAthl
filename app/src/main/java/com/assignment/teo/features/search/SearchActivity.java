@@ -52,7 +52,7 @@ public class SearchActivity extends BaseTransitionActivity
         setSupportActionBar(searchbar);
 
         viewPager = findViewById(R.id.viewpager);
-        setUpViewPager(viewPager);
+        setUpViewPager(viewPager, savedInstanceState);
 
         tabLayout = findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
@@ -79,18 +79,21 @@ public class SearchActivity extends BaseTransitionActivity
         }
     }
 
-    private void setUpViewPager(ViewPager viewPager) {
+    private void setUpViewPager(ViewPager viewPager, Bundle savedInstanceState) {
         SearchTabAdapter adapter = new SearchTabAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(MoviesListFragment.newInstance(), "MOVIES");
-        adapter.addFragment(ShowsListFragment.newInstance(), "SHOWS");
+        if (isFirstTimeRunning(savedInstanceState)) {
+            adapter.addFragment(MoviesListFragment.newInstance());
+            adapter.addFragment(ShowsListFragment.newInstance());
+        } else {
+            adapter.addFragment((MoviesListFragment) getSupportFragmentManager()
+                    .getFragment(savedInstanceState, "MOVIES"));
+            adapter.addFragment((ShowsListFragment) getSupportFragmentManager()
+                    .getFragment(savedInstanceState, "SHOWS"));
+        }
 
         viewPager.setOffscreenPageLimit(1);
         viewPager.setAdapter(adapter);
-    }
-
-    private boolean isFirstTimeRunning(Bundle savedInstanceState) {
-        return savedInstanceState == null;
     }
 
     public void finish() {
@@ -132,6 +135,11 @@ public class SearchActivity extends BaseTransitionActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override
