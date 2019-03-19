@@ -13,8 +13,9 @@ import com.assignment.teo.utils.schedulers.BaseSchedulerProvider;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Function;
 
 public class ShowsDataRepository implements ShowsRepository {
@@ -23,8 +24,7 @@ public class ShowsDataRepository implements ShowsRepository {
     private BaseSchedulerProvider schedulerProvider;
     private ShowDataMapper mapper;
 
-    private CompositeDisposable disposable = new CompositeDisposable();
-
+    @Inject
     public ShowsDataRepository(ShowsDataSource dataSource,
                                BaseSchedulerProvider schedulerProvider,
                                ShowDataMapper mapper) {
@@ -54,11 +54,5 @@ public class ShowsDataRepository implements ShowsRepository {
         };
     }
 
-    @Override
-    public void unsubscribe() {
-        if (disposable != null && !disposable.isDisposed()) {
-            disposable.clear();
-        }
-    }
 }
 

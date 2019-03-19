@@ -39,8 +39,6 @@ public class ShowsListPresenter implements ShowsListMVP.Presenter {
 
     @Override
     public void unsubscribe() {
-        searchShows.unsubscribe();
-
         if (disposable != null && !disposable.isDisposed()) {
             disposable.clear();
         }

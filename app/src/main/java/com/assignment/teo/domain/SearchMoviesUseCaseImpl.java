@@ -32,8 +32,4 @@ public class SearchMoviesUseCaseImpl implements SearchMoviesUseCase {
                 .observeOn(schedulerProvider.androidMainThread());
     }
 
-    @Override
-    public void unsubscribe() {
-        repository.unsubscribe();
-    }
 }

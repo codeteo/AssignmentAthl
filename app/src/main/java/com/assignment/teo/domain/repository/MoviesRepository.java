@@ -14,9 +14,4 @@ public interface MoviesRepository {
      */
     Observable<List<Movie>> execute(String queryText);
 
-    /**
-     * Remove RxJava subscriptions.
-     */
-    void unsubscribe();
-
 }

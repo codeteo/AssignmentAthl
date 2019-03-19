@@ -18,10 +18,4 @@ public class SearchPresenter implements SearchMVP.Presenter {
         this.view = view;
     }
 
-    @Override
-    public void onLoadData() {
-        if (view != null) {
-            view.showMessage("LOADED");
-        }
-    }
 }

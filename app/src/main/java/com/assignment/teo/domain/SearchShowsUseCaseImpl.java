@@ -33,8 +33,4 @@ public class SearchShowsUseCaseImpl implements SearchShowsUseCase {
                 .observeOn(schedulerProvider.androidMainThread());
     }
 
-    @Override
-    public void unsubscribe() {
-        repository.unsubscribe();
-    }
 }

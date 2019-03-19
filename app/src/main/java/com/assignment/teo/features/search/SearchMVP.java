@@ -7,15 +7,11 @@ package com.assignment.teo.features.search;
 public interface SearchMVP {
 
     interface View {
-
-        void showMessage(String message);
-
+        // empty but kept in case we need any presenter methods.
     }
 
     interface Presenter {
-
-        void onLoadData();
-
+        // empty but kept in case we need to pass data to the View
     }
 
 }

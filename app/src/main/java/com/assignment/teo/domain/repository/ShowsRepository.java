@@ -15,9 +15,4 @@ public interface ShowsRepository {
      */
     Observable<List<Show>> execute(String queryText);
 
-    /**
-     * Remove RxJava subscriptions.
-     */
-    void unsubscribe();
-
 }

@@ -38,7 +38,6 @@ import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
-import timber.log.Timber;
 
 import static com.assignment.teo.Constants.EMPTY_STRING;
 import static com.assignment.teo.features.details.DetailsActivity.GENRE_ID_INTENT_KEY;
@@ -183,11 +182,6 @@ public class SearchActivity extends BaseSearchActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(SEARCH_STRING_LAST_VALUE_KEY, lastSearchedString);
-    }
-
-    @Override
-    public void showMessage(String message) {
-        Timber.i("SHOW MESSAGE");
     }
 
     /**

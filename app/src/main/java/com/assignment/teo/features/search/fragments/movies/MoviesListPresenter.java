@@ -38,8 +38,6 @@ public class MoviesListPresenter implements MoviesListMVP.Presenter {
 
     @Override
     public void unsubscribe() {
-        searchMovies.unsubscribe();
-
         if (disposable != null && !disposable.isDisposed()) {
             disposable.clear();
         }

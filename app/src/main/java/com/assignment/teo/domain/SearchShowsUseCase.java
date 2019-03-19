@@ -12,6 +12,5 @@ public interface SearchShowsUseCase {
 
     Observable<List<Show>> getShows(String queryText);
 
-    void unsubscribe();
 }
 

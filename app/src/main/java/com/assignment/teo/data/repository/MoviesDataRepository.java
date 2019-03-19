@@ -16,7 +16,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Function;
 
 public class MoviesDataRepository implements MoviesRepository {
@@ -24,8 +23,6 @@ public class MoviesDataRepository implements MoviesRepository {
     private MoviesDataSource dataSource;
     private BaseSchedulerProvider schedulerProvider;
     private MovieDataMapper mapper;
-
-    private CompositeDisposable disposable = new CompositeDisposable();
 
     @Inject
     public MoviesDataRepository(MoviesDataSource dataSource,
@@ -57,11 +54,4 @@ public class MoviesDataRepository implements MoviesRepository {
         };
     }
 
-
-    @Override
-    public void unsubscribe() {
-        if (disposable != null && !disposable.isDisposed()) {
-            disposable.clear();
-        }
-    }
 }
