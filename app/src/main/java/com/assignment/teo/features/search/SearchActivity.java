@@ -224,7 +224,7 @@ public class SearchActivity extends BaseSearchActivity
     }
 
     @Subscribe
-    void onOpenDetailsScreenEvent(OpenDetailsActivityEvent event) {
+    public void onOpenDetailsScreenEvent(OpenDetailsActivityEvent event) {
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra(TITLE_INTENT_KEY, event.getTitle());
         intent.putExtra(IMG_URL_INTENT_KEY, event.getImageUrl());

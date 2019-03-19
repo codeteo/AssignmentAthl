@@ -19,7 +19,7 @@ buildscript {
                 daggerSupportVersion   : "com.google.dagger:dagger-android-support:2.21",
 
                 // Networking
-                okHttp                 : "com.squareup.okhttp3:okhttp:3.14.0",
+                okHttp                 : "com.squareup.okhttp3:okhttp:3.12.0",
                 gson                   : "com.google.code.gson:gson:2.8.5",
                 retrofit               : "com.squareup.retrofit2:retrofit:2.5.0",
                 gsonConverter          : "com.squareup.retrofit2:converter-gson:2.5.0",
