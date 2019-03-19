@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.assignment.teo.R;
 import com.assignment.teo.domain.entities.Genre;
+import com.assignment.teo.features.search.enums.TypesEnum;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
@@ -34,22 +35,26 @@ public class DetailsActivity extends AppCompatActivity implements DetailsMVP.Vie
     public static final String IMG_URL_INTENT_KEY = "image_url";
     public static final String OVERVIEW_INTENT_KEY = "overview";
     public static final String GENRE_ID_INTENT_KEY = "genre_id";
+    public static final String TYPE_ENUM_INTENT_KEY = "type_enum";
 
     private static final String TITLE_KEY = "title_tag";
     private static final String IMAGE_URL_KEY = "image_url_tag";
     private static final String OVERVIEW_KEY = "overview_tag";
     private static final String GENRE_ID_KEY = "genre_id_tag";
+    private static final String TYPE_ID_KEY = "type_id_tag";
 
     @BindView(R.id.toolbar_details) Toolbar toolbar;
     @BindView(R.id.collapsing_toolbar) CollapsingToolbarLayout collapsingToolbar;
     @BindView(R.id.iv_details_backdrop) ImageView ivImage;
     @BindView(R.id.tv_details_overview) TextView tvOverview;
+    @BindView(R.id.tv_details_genre) TextView tvGenre;
 
     @Inject
     DetailsMVP.Presenter presenter;
 
     private String title, imageUrl, overview;
     private int genreId;
+    private TypesEnum type;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,11 +70,17 @@ public class DetailsActivity extends AppCompatActivity implements DetailsMVP.Vie
             imageUrl = savedInstanceState.getString(IMAGE_URL_KEY);
             overview = savedInstanceState.getString(OVERVIEW_KEY);
             genreId = savedInstanceState.getInt(GENRE_ID_KEY);
+            type = (TypesEnum) savedInstanceState.getSerializable(TYPE_ENUM_INTENT_KEY);
         }
 
         setupViews();
 
-        presenter.onLoadMovieGenre();
+        // ideally this check should happen inside the presenter
+        if (type == TypesEnum.MOVIE) {
+            presenter.onLoadMovieGenre(genreId);
+        } else {
+            presenter.onLoadShowGenre(genreId);
+        }
     }
 
     @Override
@@ -89,6 +100,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsMVP.Vie
         outState.putString(OVERVIEW_KEY, overview);
         outState.putString(IMAGE_URL_KEY, imageUrl);
         outState.putInt(GENRE_ID_KEY, genreId);
+        outState.putSerializable(TYPE_ID_KEY, type);
     }
 
     private void setupViews() {
@@ -117,6 +129,6 @@ public class DetailsActivity extends AppCompatActivity implements DetailsMVP.Vie
 
     @Override
     public void showGenre(Genre genre) {
-
+        tvGenre.setText(genre.getName());
     }
 }

@@ -3,4 +3,5 @@
     <string name="hint_search_for_stuff">Search for stuff</string>
 
     <string name="details_overview_title">Overview</string>
+    <string name="details_genre_title">Genre</string>
 </resources>

@@ -1,17 +1,22 @@
 package com.assignment.teo.data.bus.events;
 
+import com.assignment.teo.features.search.enums.TypesEnum;
+
 public class OpenDetailsActivityEvent {
 
     private String imageUrl;
     private String title;
     private String overview;
     private int genreId;
+    private TypesEnum type;
 
-    public OpenDetailsActivityEvent(String imageUrl, String title, String overview, int genreId) {
+    public OpenDetailsActivityEvent(String imageUrl, String title,
+                                    String overview, int genreId, TypesEnum type) {
         this.imageUrl = imageUrl;
         this.title = title;
         this.overview = overview;
         this.genreId = genreId;
+        this.type = type;
     }
 
     public String getImageUrl() {
@@ -44,5 +49,13 @@ public class OpenDetailsActivityEvent {
 
     public void setGenreId(int genreId) {
         this.genreId = genreId;
+    }
+
+    public TypesEnum getType() {
+        return type;
+    }
+
+    public void setType(TypesEnum type) {
+        this.type = type;
     }
 }

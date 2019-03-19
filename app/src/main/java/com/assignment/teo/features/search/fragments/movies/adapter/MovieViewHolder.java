@@ -13,6 +13,7 @@ import com.assignment.teo.data.bus.events.OpenDetailsActivityEvent;
 import com.squareup.picasso.Picasso;
 
 import static com.assignment.teo.Constants.appendImageUrl;
+import static com.assignment.teo.features.search.enums.TypesEnum.MOVIE;
 
 /**
  * View holder for the movie item.
@@ -52,6 +53,6 @@ public class MovieViewHolder extends BaseViewHolder<MovieViewModel> {
                 BusProvider.getInstance().post(
                     new OpenDetailsActivityEvent(
                         viewModel.getThumbnail(), viewModel.getTitle(),
-                        viewModel.getOverview(), viewModel.getGenreId())));
+                        viewModel.getOverview(), viewModel.getGenreId(), MOVIE)));
     }
 }

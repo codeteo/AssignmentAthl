@@ -2,6 +2,9 @@ package com.assignment.teo.features.details;
 
 import com.assignment.teo.di.scopes.ActivityScope;
 import com.assignment.teo.domain.GetGenresUseCase;
+import com.assignment.teo.domain.entities.Genre;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -16,25 +19,39 @@ public class DetailsPresenter implements DetailsMVP.Presenter {
     private CompositeDisposable disposable = new CompositeDisposable();
 
     @Inject
-    public DetailsPresenter(GetGenresUseCase fetchGenres, DetailsMVP.View view) {
+    DetailsPresenter(GetGenresUseCase fetchGenres, DetailsMVP.View view) {
         this.fetchGenres = fetchGenres;
         this.view = view;
     }
 
     @Override
-    public void onLoadMovieGenre() {
+    public void onLoadMovieGenre(int genreId) {
         disposable.add(
             fetchGenres
                 .getMovieGenres()
-                .subscribe(genres -> {}, throwable -> {}));
+                .subscribe(
+                        genres -> findGenre(genreId, genres),
+                        throwable -> {}));
     }
 
     @Override
-    public void onLoadShowGenre() {
+    public void onLoadShowGenre(int genreId) {
         disposable.add(
             fetchGenres
                 .getShowGenres()
-                .subscribe(genres -> {}, throwable -> {}));
+                .subscribe(
+                        genres -> findGenre(genreId, genres),
+                        throwable -> {}));
+    }
+
+    private void findGenre(int genreId, List<Genre> genres) {
+        if (genres != null && !genres.isEmpty()) {
+            for (Genre genre: genres) {
+                if (genre.getId() == genreId) {
+                    view.showGenre(genre);
+                }
+            }
+        }
     }
 
     @Override

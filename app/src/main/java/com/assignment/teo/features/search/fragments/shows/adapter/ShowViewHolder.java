@@ -13,6 +13,7 @@ import com.assignment.teo.data.bus.events.OpenDetailsActivityEvent;
 import com.squareup.picasso.Picasso;
 
 import static com.assignment.teo.Constants.appendImageUrl;
+import static com.assignment.teo.features.search.enums.TypesEnum.SHOW;
 
 /**
  * View holder for the TV Show list item.
@@ -52,7 +53,7 @@ public class ShowViewHolder extends BaseViewHolder<ShowViewModel> {
                 BusProvider.getInstance().post(
                     new OpenDetailsActivityEvent(
                         viewModel.getThumbnail(), viewModel.getTitle(),
-                        viewModel.getOverview(), viewModel.getGenreId())));
+                        viewModel.getOverview(), viewModel.getGenreId(), SHOW)));
     }
 }
 

@@ -48,8 +48,19 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include
-            layout="@layout/merge_overview" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="24dp">
+
+            <include
+                layout="@layout/merge_overview_card" />
+
+            <include
+                layout="@layout/merge_genre_card" />
+
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

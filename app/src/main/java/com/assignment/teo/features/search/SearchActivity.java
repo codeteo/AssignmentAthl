@@ -45,6 +45,7 @@ import static com.assignment.teo.features.details.DetailsActivity.GENRE_ID_INTEN
 import static com.assignment.teo.features.details.DetailsActivity.IMG_URL_INTENT_KEY;
 import static com.assignment.teo.features.details.DetailsActivity.OVERVIEW_INTENT_KEY;
 import static com.assignment.teo.features.details.DetailsActivity.TITLE_INTENT_KEY;
+import static com.assignment.teo.features.details.DetailsActivity.TYPE_ENUM_INTENT_KEY;
 import static com.assignment.teo.utils.RetainedFragment.RETAINED_FRAGMENT_TAG;
 
 public class SearchActivity extends BaseSearchActivity
@@ -224,12 +225,12 @@ public class SearchActivity extends BaseSearchActivity
 
     @Subscribe
     void onOpenDetailsScreenEvent(OpenDetailsActivityEvent event) {
-        Timber.i("EVENT RECEIVED");
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra(TITLE_INTENT_KEY, event.getTitle());
         intent.putExtra(IMG_URL_INTENT_KEY, event.getImageUrl());
         intent.putExtra(OVERVIEW_INTENT_KEY, event.getOverview());
         intent.putExtra(GENRE_ID_INTENT_KEY, event.getGenreId());
+        intent.putExtra(TYPE_ENUM_INTENT_KEY, event.getType());
         startActivity(intent);
         overridePendingTransition(0, 0);
     }

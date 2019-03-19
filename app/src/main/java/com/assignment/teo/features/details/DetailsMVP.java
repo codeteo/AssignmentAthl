@@ -16,9 +16,9 @@ public interface DetailsMVP {
 
     interface Presenter {
 
-        void onLoadMovieGenre();
+        void onLoadMovieGenre(int genreId);
 
-        void onLoadShowGenre();
+        void onLoadShowGenre(int genreId);
 
         void unsubscribe();
 
