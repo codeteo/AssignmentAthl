@@ -46,6 +46,7 @@ public class MovieViewHolder extends BaseViewHolder<MovieViewModel> {
         Picasso.with(context)
                 .load(appendImageUrl(viewModel.getThumbnail()))
                 .fit()
+                .centerCrop()
                 .error(R.drawable.placeholder_movie)
                 .into(ivPoster);
 
