@@ -1,6 +1,6 @@
 # Movies Sample App
 
-Simple example creating an Android application using the API provided by 
+Simple example of an Android application using the API provided by 
 (The Movie DB)[https://www.themoviedb.org/documentation/api].
 
 ## Features
@@ -10,7 +10,8 @@ Simple example creating an Android application using the API provided by
 
 ## How to build this project
 
-This app uses [The Movie Database](https://www.themoviedb.org/documentation/api) API to retrieve movies.
+This app uses [The Movie Database](https://www.themoviedb.org/documentation/api) API to retrieve movies 
+and shows information.
 You must provide your own API key in order to build the app. Create a file named `serets.properties` in the 
 app's top folder (`/AssignmentAthl/`) and paste your API key like : 
     ```
@@ -37,7 +38,6 @@ the `Domain` layer.
 
 You can have a high level overview of the architecture in the following image: 
 
-
 ![](./art/architecture-layers.png)
 
 There are three main layers : Presentation, Domain and Data. The first layer is the outer layer in the image 
@@ -47,7 +47,7 @@ the entities that are useful for our app, things like a Movie or a Show entity b
 layer is the one named Data. It interacts with all different kinds of data sources to get the data the app needs
 to display. 
 
-Each outer layer has a dependency to the one layer that is inner of it. More pricesely it has a dependency to
+Each outer layer depends on it's subsequent inner layer. More pricesely it has a dependency to
 an abstraction of the inner layer. This is a principle that is called `Inversion of Control` and it is critical for the success of this architecture.
 In short what this principle says is that high-modules should not depend on lower modules and all the communication
 should happen through abstractions (Interfaces). This way we can have a clean separation of the layers and clear
@@ -59,6 +59,13 @@ Thanks to separation of concerns between classes we can easily change an applica
 * [Uncle Bob - The Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 * [Fernando Cejas - Architecting Android Reloaded](https://fernandocejas.com/2018/05/07/architecting-android-reloaded/)
 * [Antonio Leiva - Clean Architecture for Andorid with Kotlin](https://antonioleiva.com/clean-architecture-android/)
+
+### Improvements
+
+* Modularization to speed up builds. [Modularization - Why you should care](https://jeroenmols.com/blog/2019/03/06/modularizationwhy/)
+* Write effective Integration tests.
+* Implement more features (pagination, etc).
+* Modernize the design by following [Material Theming](https://material.io/design/material-theming/overview.html#material-theming).
 
 ## License
 
