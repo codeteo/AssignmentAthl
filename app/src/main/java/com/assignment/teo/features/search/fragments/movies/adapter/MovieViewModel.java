@@ -37,7 +37,11 @@ public final class MovieViewModel {
     }
 
     public int getGenreId() {
-        return movie.getGenreIds()[0];
+        if (movie.getGenreIds().length > 0) {
+            return movie.getGenreIds()[0];
+        } else {
+            return 0;
+        }
     }
 
 }

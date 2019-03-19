@@ -33,6 +33,10 @@ public final class ShowViewModel {
     }
 
     public int getGenreId() {
-        return show.getGenreIds()[0];
+        if (show.getGenreIds().length > 0) {
+            return show.getGenreIds()[0];
+        } else {
+            return 0;
+        }
     }
 }
