@@ -4,4 +4,8 @@
 
     <string name="details_overview_title">Overview</string>
     <string name="details_genre_title">Genre</string>
+
+    <string name="main_toolbar_search_text">Start typing…</string>
+    <string name="main_title_text_1">Use Search</string>
+    <string name="main_title_text_2">For Movies &amp; TV Shows</string>
 </resources>

@@ -10,4 +10,7 @@
     <!-- Details Screen -->
     <dimen name="detail_overview_textsize">16sp</dimen>
 
+    <!-- Main Screen -->
+    <dimen name="main_title_textsize">26sp</dimen>
+
 </resources>
