@@ -12,7 +12,7 @@ Simple example of an Android application using the API provided by
 
 This app uses [The Movie Database](https://www.themoviedb.org/documentation/api) API to retrieve movies 
 and shows information.
-You must provide your own API key in order to build the app. Create a file named `serets.properties` in the 
+You must provide your own API key in order to build the app. Create a file named `secrets.properties` in the 
 app's top folder (`/AssignmentAthl/`) and paste your API key like : 
     ```
     API_KEY=*******************
